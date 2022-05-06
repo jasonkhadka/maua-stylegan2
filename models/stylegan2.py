@@ -303,8 +303,9 @@ class ManipulationLayer(th.nn.Module):
         out = input
         for transform_dict in tranforms_dict_list:
             if transform_dict["layer"] == self.layer:
-                import pdb; pdb.set_trace()
-                out = transform_dict["transform"].to(out.device)(out)
+                # out = transform_dict["transform"].to(out.device)(out)
+                device = out.device
+                out = transform_dict["transform"](out).to(device)
         return out
 
 
